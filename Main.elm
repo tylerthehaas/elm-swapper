@@ -69,7 +69,6 @@ swapper model =
             , button [ disabled (String.isEmpty model.leftSelected), onClick (MoveLeft model.leftSelected) ] [ text "⇦" ]
             ]
         , select_ model.likedFlavors OnLeftSelect (List.length model.availableFlavors) model.leftSelected
-        , div [] [ text (toString model) ]
         ]
 
 
