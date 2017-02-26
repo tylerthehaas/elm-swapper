@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.App {
+  padding: 20px;
+}
+
+.swapper {
+  display: flex;
+}
+
+.swapper .buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.swapper button {
+  border-radius: 4px;
+  font-size: 18px;
+  margin: 5px 10px;
+}
+
+.swapper select {
+  font-size: 18px;
+  width: 170px;
+}
