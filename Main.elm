@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, disabled, size, value)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onClick, onInput)
 
 
 -- MODEL
@@ -65,11 +65,11 @@ swapper model =
         [ class "swapper" ]
         [ select_ model.availableFlavors OnRightSelect (List.length model.availableFlavors) model.rightSelected
         , div [ class "buttons" ]
-            [ button [ disabled (String.isEmpty model.rightSelected) ] [ text "⇨" ]
-            , button [ disabled (String.isEmpty model.leftSelected) ] [ text "⇦" ]
+            [ button [ disabled (String.isEmpty model.rightSelected), onClick MoveRight ] [ text "⇨" ]
+            , button [ disabled (String.isEmpty model.leftSelected), onClick MoveLeft ] [ text "⇦" ]
             ]
         , select_ model.likedFlavors OnLeftSelect (List.length model.availableFlavors) model.leftSelected
-          -- , div [] [ text (toString model) ]
+        , div [] [ text (toString model) ]
         ]
 
 
