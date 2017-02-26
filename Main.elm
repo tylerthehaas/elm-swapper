@@ -65,8 +65,8 @@ swapper model =
         [ class "swapper" ]
         [ select_ model.availableFlavors OnRightSelect (List.length model.availableFlavors) model.rightSelected
         , div [ class "buttons" ]
-            [ button [ disabled (String.isEmpty model.rightSelected), onClick MoveRight ] [ text "⇨" ]
-            , button [ disabled (String.isEmpty model.leftSelected), onClick MoveLeft ] [ text "⇦" ]
+            [ button [ disabled (String.isEmpty model.rightSelected), onClick (MoveRight model.rightSelected) ] [ text "⇨" ]
+            , button [ disabled (String.isEmpty model.leftSelected), onClick (MoveLeft model.leftSelected) ] [ text "⇦" ]
             ]
         , select_ model.likedFlavors OnLeftSelect (List.length model.availableFlavors) model.leftSelected
         , div [] [ text (toString model) ]
@@ -96,12 +96,14 @@ update msg model =
             { model
                 | likedFlavors = str :: model.likedFlavors
                 , availableFlavors = List.filter (\flavor -> str /= flavor) model.availableFlavors
+                , rightSelected = ""
             }
 
         MoveLeft str ->
             { model
                 | availableFlavors = str :: model.availableFlavors
                 , likedFlavors = List.filter (\flavor -> str /= flavor) model.likedFlavors
+                , leftSelected = ""
             }
 
 
