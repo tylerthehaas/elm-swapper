@@ -53,7 +53,8 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ select_ model.availableFlavors OnRightSelect (List.length model.availableFlavors) model.rightSelected ]
+        [ select_ model.availableFlavors OnRightSelect (List.length model.availableFlavors) model.rightSelected
+        ]
 
 
 select_ : List String -> (String -> msg) -> Int -> String -> Html msg
