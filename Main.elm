@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (size, value)
+import Html.Attributes exposing (class, disabled, size, value)
 import Html.Events exposing (onInput)
 
 
@@ -43,6 +43,8 @@ initialModel =
 type Msg
     = OnRightSelect String
     | OnLeftSelect String
+    | MoveRight String
+    | MoveLeft String
 
 
 
@@ -51,9 +53,20 @@ type Msg
 
 view : Model -> Html Msg
 view model =
+    swapper model
+
+
+swapper : Model -> Html Msg
+swapper model =
     div
-        []
+        [ class "swapper" ]
         [ select_ model.availableFlavors OnRightSelect (List.length model.availableFlavors) model.rightSelected
+        , div [ class "buttons" ]
+            [ button [ disabled (String.isEmpty model.rightSelected) ] [ text "⇨" ]
+            , button [ disabled (String.isEmpty model.leftSelected) ] [ text "⇦" ]
+            ]
+        , select_ model.likedFlavors OnLeftSelect (List.length model.availableFlavors) model.leftSelected
+          -- , div [] [ text (toString model) ]
         ]
 
 
@@ -75,6 +88,18 @@ update msg model =
 
         OnLeftSelect str ->
             { model | leftSelected = str }
+
+        MoveRight str ->
+            { model
+                | likedFlavors = str :: model.likedFlavors
+                , availableFlavors = List.filter (\flavor -> str /= flavor) model.availableFlavors
+            }
+
+        MoveLeft str ->
+            { model
+                | availableFlavors = str :: model.availableFlavors
+                , likedFlavors = List.filter (\flavor -> str /= flavor) model.likedFlavors
+            }
 
 
 main : Program Never Model Msg
