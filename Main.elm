@@ -53,7 +53,10 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    swapper model
+    div [ class "App" ]
+        [ h1 [] [ text "Favorite Ice Cream Flavors" ]
+        , swapper model
+        ]
 
 
 swapper : Model -> Html Msg
